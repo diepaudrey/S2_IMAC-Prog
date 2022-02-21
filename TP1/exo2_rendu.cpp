@@ -19,7 +19,9 @@ int fibonacci(int n){
 }
 
 int main(){
-    int fibo_n = fibonacci(13); //fibo_n = 233
-    cout << fibo_n << endl;
+    //Mofidier la valeur de rang;
+    int n = 13;
+    int fibo_n = fibonacci(n); //fibo_n = 233
+    cout << "Le rang " << n << " de la suite de fibonacci vaut :" << fibo_n << endl;
     return 0;
 }

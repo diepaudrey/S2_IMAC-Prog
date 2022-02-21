@@ -18,6 +18,8 @@ struct DynaTableau{
     int nb_valeurs = 0;
 };
 
+
+
 //fonctions sur DynaTableau
 void ajoute(DynaTableau* tableau, int valeur)
 {
@@ -47,10 +49,17 @@ bool est_vide(const DynaTableau* liste)
 
 void affiche(const DynaTableau* tableau)
 {
-
+    cout << "[ "; 
     for(int i=0; i<tableau->nb_valeurs; i++){
-        cout << tableau->donnees[i] << endl;
+        if(i!= tableau->nb_valeurs-1){
+            cout << tableau->donnees[i] << ", ";
+        }
+        else{
+            cout << tableau->donnees[i];
+        }
+        
     }
+    cout << " ]" << endl;
 }
 
 int recupere(const DynaTableau* tableau, int n)
@@ -265,24 +274,51 @@ int retirer_pile(Liste* liste){
 
 
 
-
 int main(){
 
-    // DynaTableau Dy_Tab; 
-    // initialise(&Dy_Tab,20);
-    // ajoute(&Dy_Tab, 5);
-    // ajoute(&Dy_Tab, 8);
-    // ajoute(&Dy_Tab, 17);
-    // //affiche(&Dy_Tab);
-    // //cout << recupere(&Dy_Tab, 1) << endl;
-    // //cout << cherche(&Dy_Tab, 8) << endl;
-    // // stocke(&Dy_Tab,0,12);
-    // // affiche(&Dy_Tab);
-    // //cout << "retirer pile : " << retirer_pile(&Dy_Tab)<< endl;
-    // //cout << "retirer file: " << retirer_file(&Dy_Tab)<< endl;
-    // pousser_pile(&Dy_Tab,7);
-    // affiche(&Dy_Tab);
+    //utilisation fonctions initialise, ajoute et affiche
+    DynaTableau Dy_Tab; 
+    initialise(&Dy_Tab,20);
+    ajoute(&Dy_Tab, 5);
+    ajoute(&Dy_Tab, 8);
+    ajoute(&Dy_Tab, 17);
+    cout << "La liste : " << endl;
+    affiche(&Dy_Tab);
 
+    cout << '\n'; 
+
+    //fonction recupere et cherche
+    cout << "Valeur recuperee : " << recupere(&Dy_Tab, 1) << endl;
+    cout << "Indice de la valeur cherchee : " << cherche(&Dy_Tab, 8) << endl;
+
+    cout << '\n'; 
+
+    //utilisation fonction stocke
+    int val_stock = 12;
+    int indice_stock = 0;
+    stocke(&Dy_Tab,indice_stock,val_stock);
+    cout << "Fonction stocke : " << endl;
+    affiche(&Dy_Tab);
+
+    cout << '\n'; 
+
+    //retirer et pousser (file ou pile)
+    cout << "pousser pile : "; 
+    pousser_pile(&Dy_Tab,7);
+    affiche(&Dy_Tab);
+
+    cout << "retirer pile : " << retirer_pile(&Dy_Tab)<< endl;
+    affiche(&Dy_Tab);
+
+    cout << "retirer file: " << retirer_file(&Dy_Tab)<< endl;
+    affiche(&Dy_Tab);
+
+    cout << "pousser file : ";
+    pousser_file(&Dy_Tab, 152);
+    affiche(&Dy_Tab);
+
+    cout << '\n'; 
+    cout << '\n'; 
 
     Liste lst;
     initialise(&lst);
@@ -293,36 +329,35 @@ int main(){
     cout << "La liste de base: " << endl;
     affiche(&lst);
 
-    // pousser_pile(&lst, 10);
-    // cout << "La liste avec une nouvelle valeur au début: " << endl;
-    // affiche(&lst);
+    pousser_pile(&lst, 10);
+    cout << "La liste avec une nouvelle valeur au début: " << endl;
+    affiche(&lst);
 
-    // retirer_file(&lst);
-    // cout << "La liste sans la 1ere valeur: " << endl;
-    // affiche(&lst);
+    retirer_file(&lst);
+    cout << "La liste sans la 1ere valeur: " << endl;
+    affiche(&lst);
 
     retirer_pile(&lst);
     cout << "La liste sans la derniere valeur: " << endl;
     affiche(&lst);
 
 
+    //est_vide
+    if(est_vide(&lst)==1){
+        cout << "La liste est vide" << endl;
+    }
+    else{
+        cout<< "La liste n'est pas vide" <<endl;
+    }
 
-    // //est_vide
-    // if(est_vide(&lst)==1){
-    //     cout << "La liste est vide" << endl;
-    // }
-    // else{
-    //     cout<< "La liste n'est pas vide" <<endl;
-    // }
+    int recup = recupere(&lst, 2);
+    cout << "Voici la valeur souhaitée : " << recup << endl;
+    int find = cherche(&lst, 7);
+    cout << "L'index vaut : " << find << endl;
 
-    // int recup = recupere(&lst, 2);
-    // cout << "Voici la valeur souhaitée : " << recup << endl;
-    // int find = cherche(&lst, 7);
-    // cout << "L'index vaut : " << find << endl;
-
-    // stocke(&lst, 2, 158);
-    // cout << "La liste modifiée: " << endl;
-    // affiche(&lst);
+    stocke(&lst, 2, 158);
+    cout << "La liste modifiée: " << endl;
+    affiche(&lst);
     
     
     return 0;

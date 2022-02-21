@@ -13,7 +13,10 @@ int power(int value, int n){
 }
 
 int main(){
-    int test = power(2,5); //test = 32
-    cout << test << endl;
+    //Modifier les valeurs pour tester
+    int entier = 2;
+    int exposant = 5; 
+    int test = power(entier,exposant); //test = 32
+    cout << entier <<  " a la puissance " << exposant << " vaut : " << test << endl;
     return 0;
 }

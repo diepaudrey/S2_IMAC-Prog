@@ -22,26 +22,23 @@ void afficheTab(int arr[], int lenArr){
 
 
 
-
 void insertionSort(int tab[], int len){
-    int result[len];
-    result[0]=tab[0];
+    int key;
     int j;
     for(int i=1; i<len; i++){
-        j=i;
-        if(tab[i]<result[j-1]){
-            while(j>0 && tab[i]<result[j-1]){
+        key = tab[i];
+        j=i-1;
 
-                result[j] = result[j-1];
-    
-                j = j-1;
-            }
+        while(j>=0 && tab[j]>key){
+
+            tab[j+1] = tab[j];
+
+            j--;
 
         }
-        result[j] = tab[i];
+        tab[j+1] = key;
        
     }
-    afficheTab(result, len);
 
 
 }
@@ -49,11 +46,10 @@ void insertionSort(int tab[], int len){
 
 
 
-
 int main(){
     int arr[4]={1,3,0,-3};
     insertionSort(arr, 4);
+    afficheTab(arr,4);
     
-
     return 0;
 }

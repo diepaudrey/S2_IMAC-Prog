@@ -22,10 +22,11 @@ void afficheTab(int arr[], int lenArr){
 
 
 
+
 void bubbleSort(int tab[], int len){
 
-   for(int j=len-1; j>0; j--){
-       for(int i=0; i<j;i++){
+   for(int j=0; j<len-1; j++){
+       for(int i=0; i<len-j-1;i++){
             if(tab[i]>tab[i+1]){
                 swap(&tab[i],&tab[i+1]);
             }

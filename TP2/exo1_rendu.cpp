@@ -25,7 +25,7 @@ void selectionSort(int tab[], int longueur){
     int min;
     int min_index;
     
-    for(int j=0; j<longueur; j++){
+    for(int j=0; j<longueur-1; j++){
         min= tab[j];
         min_index = j;
 

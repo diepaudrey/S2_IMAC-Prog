@@ -240,21 +240,19 @@ struct Node
 
 	Node* find(int value) {
         if(this->value == value){
-            cout << "found " << value << endl;
-            cout << this << endl;
             return this;
         }
-
         else{
             //go left subtree
-            if(this->left != nullptr){
+            if(value < this->value){
                 this->left->find(value);
+
             }
-        
             //go right subtree
-            if(this->right != nullptr){
+            else{
                 this->right->find(value);
             }
+           
         }
         
 	}
@@ -315,13 +313,12 @@ int main(){
         cout << "With postorder travel : " << endl; 
         a_node.postorderTravel(allNodes,nodeIni);
 
-    
-
 
 
     //Node find 
-        int toFind = 4;
+        int toFind = 3;
         Node* find = a_node.find(toFind);
+        cout << find->value << endl;
         cout << find << endl;
 
 

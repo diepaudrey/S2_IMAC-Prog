@@ -6,8 +6,8 @@ int search(int value, int array[], int size){
     if(size<0){
         return -1;
     }
-    if(array[size]==value){
-        return size;
+    if(array[size-1]==value){
+        return size-1;
     }
     return search(value, array, size-1);
     

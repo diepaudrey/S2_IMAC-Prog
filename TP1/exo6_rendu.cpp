@@ -28,7 +28,12 @@ void ajoute(DynaTableau* tableau, int valeur)
         tableau->nb_valeurs ++;
     }
     else{
-        tableau->donnees = (int*)malloc(sizeof(int));
+        //correction
+        tableau->capacite++;
+        int* newDonnee = (int*)realloc(tableau->donnees, tableau->capacite*sizeof(int));
+        tableau->donnees = newDonnee;
+        tableau->donnees[tableau->nb_valeurs] = valeur;
+        tableau->nb_valeurs ++;
     }
 }
 
@@ -145,7 +150,10 @@ int retirer_pile(DynaTableau* liste){
 //fonctions sur Liste
 void initialise(Liste* liste)
 {
-    liste = new Liste();
+    //correction
+    liste->premier = NULL;
+    liste->dernier = NULL;
+
 
 }
 

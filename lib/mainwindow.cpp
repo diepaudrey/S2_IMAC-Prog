@@ -233,7 +233,13 @@ void MainWindow::clearArrays()
 {
     while (!this->numberItems.isEmpty())
     {
-        for (QGraphicsItem* item : numberItems.takeLast()) {
+        QVector<NumberGraphicsItem*>& items = this->numberItems.last();
+        this->numberItems.pop_back();
+        NumberGraphicsItem* item = nullptr;
+        while(items.size())
+        {
+            item = items.last();
+            items.pop_back();
             toRemove.push_back(item);
         }
     }
@@ -327,7 +333,7 @@ void MainWindow::updateInstructionDuration(int value)
 
 int MainWindow::updateNumberItems(int itemWidth, int& maxX, int& maxY)
 {
-    if (numberItems.length())
+    if (numberItems.size())
         maxY += qMin<int>(qMax<int>(50, scene.height() * 0.01f), 150);
 
     maxX = 0;

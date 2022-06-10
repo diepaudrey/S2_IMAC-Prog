@@ -23,7 +23,14 @@ std::vector<string> TP5::names(
 unsigned long int hash(string key)
 {
     // return an unique hash id from key
-    return 0;
+    int i = 0;
+    int key_hash;
+    while(key[i] != '\0'){
+        key_hash += (int)key[i] * pow(124,key.size()-1-i);
+        i++;
+    }
+
+    return key_hash;
 }
 
 struct MapNode : public BinaryTree
@@ -52,6 +59,19 @@ struct MapNode : public BinaryTree
      */
     void insertNode(MapNode* node)
     {
+        if(node->value < this->value && this->left != nullptr){
+            this->left->insertNode(node);
+        }
+        else if(node->value > this->value && this->right != nullptr){
+            this->right->insertNode(node);
+        }
+
+        else if(node->value < this->value){
+            this->left = node;
+        }
+        else{
+            this->right = node;
+        }
 
     }
 
@@ -80,6 +100,13 @@ struct Map
     void insert(string key, int value)
     {
 
+        if(this->root == nullptr){
+            this->root = new MapNode(key, value);
+        }
+        else{
+            this->root->insertNode(key,value);
+        }
+
     }
 
     /**
@@ -89,7 +116,24 @@ struct Map
      */
     int get(string key)
     {
-        return -1;
+
+        MapNode* curseur = this->root;
+        int value = 0;
+
+        while(curseur!= nullptr){
+            if(curseur->key_hash == hash(key)){
+                value = curseur->value;
+                curseur = nullptr;
+            }
+            else if(hash(key) > curseur->key_hash){
+                curseur = curseur->right;
+            }
+            else if(hash(key) < curseur->key_hash){
+                curseur = curseur->left;
+            }
+        }
+
+        return value;
     }
 
     MapNode* root;
